@@ -256,8 +256,8 @@ function menuMaterias(dni){
                     case 0:
                     case 1:
                     case 2:
-                        if(objAlumnx.verNotas(objAlumnx.verNombreDeMaterias([op2]).length == 0)){
-                            alert(`No tenes ninguna nota registrada en la materia ${objAlumnx.verNombreDeMaterias([op2])}`);
+                        if(objAlumnx.verNotas(objAlumnx.verNombreDeMaterias([op4]).length == 0)){
+                            alert(`No tenes ninguna nota registrada en la materia ${objAlumnx.verNombreDeMaterias([op4])}`);
                             break;
                         }
                         alert(objAlumnx.verPromedioDe(objAlumnx.verNombreDeMaterias()[op4]));
