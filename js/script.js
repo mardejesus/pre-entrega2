@@ -137,19 +137,26 @@ facu.agregarMateria(new Materia(`Algoritmos`));
 // Menú
 
 function menuPrincipal(){
-    let dni = parseInt(prompt("Ingresa tu dni"));
+    let dni = parseInt(prompt("Ingresa tu dni:"));
+    while(isNaN(dni)|| typeof dni != "number"){
+        dni = (parseInt(prompt("Por favor, ingresa el dato solicitado correctamente. \nIngresá tu dni:")))
+    }
+
     if(!facu.comprobarInscripcion(dni)){
         alert(`No estas inscriptx al sistema. A continuación, inscribite.`)
-        dni = menuInscripcionFacultad();
+        menuInscripcionFacultad(dni);
     }
+
     menuMaterias(dni);
 }
 
-function menuInscripcionFacultad(){
-    let nombre = prompt("Ingrese su nombre");
-    let dni = parseInt(prompt("ingrese su dni"));
+function menuInscripcionFacultad(dni){
+    let nombre = prompt("Ingresá tu nombre");
+    while(nombre==null||nombre==""||typeof nombre != "string"){
+        nombre = (prompt("Por favor, ingresa el dato solicitado correctamente.\nIngresá tu nombre:"))
+    }
     facu.agregarAlumnx(new Alumnx(nombre, dni));
-    return dni;
+    alert(`${nombre}, dni ${dni}, te registraste correctamente.`)
 }
 
 function stringOpcionesMateriasInscriptx(objAlumnx){
@@ -175,7 +182,12 @@ function menuMaterias(dni){
         6- SALIR`))){
 
             case 0:
+                if(objAlumnx.verNombreDeMaterias().length == 0){
+                    alert("No estas inscriptx a ninguna materia.")
+                }
+            else{
                 alert(objAlumnx.verNombreDeMaterias());
+            }
                 break;
             
             case 1:
@@ -196,11 +208,19 @@ function menuMaterias(dni){
                 break
 
             case 2:
+                if(stringOpcionesMateriasInscriptx(objAlumnx).length==0){
+                    alert("No estas inscriptx a ninguna materia");
+                    break;
+                }
                 let op2 = parseInt(prompt(`Ingresa el numero de materia de la que queres ver tus notas ${stringOpcionesMateriasInscriptx(objAlumnx)}`));
                 switch (op2){
                     case 0:
                     case 1:
                     case 2:
+                        if(objAlumnx.verNotas(objAlumnx.verNombreDeMaterias([op2]).length == 0)){
+                            alert(`No tenes ninguna nota registrada en la materia ${objAlumnx.verNombreDeMaterias([op2])}`);
+                            break;
+                        }
                         alert(objAlumnx.verNotas(objAlumnx.verNombreDeMaterias()[op2]));
                         break;
                     default:
@@ -209,6 +229,10 @@ function menuMaterias(dni){
                 break
 
             case 3:
+                if(stringOpcionesMateriasInscriptx(objAlumnx).length==0){
+                    alert("No estas inscriptx a ninguna materia");
+                    break;
+                }
                 let op3 = parseInt(prompt(`Ingresa el numero de materia de la que queres agregar una nota ${stringOpcionesMateriasInscriptx(objAlumnx)}`));
                 let nota = parseInt(prompt(`Ingresa nota`));
                 switch (op3){
@@ -223,11 +247,19 @@ function menuMaterias(dni){
                 break;
 
             case 4:
+                if(stringOpcionesMateriasInscriptx(objAlumnx).length==0){
+                    alert("No estas inscriptx a ninguna materia");
+                    break;
+                }
                 let op4 = parseInt(prompt(`Ingresa el numero de materia de la que queres ver el promedio ${stringOpcionesMateriasInscriptx(objAlumnx)}`));
                 switch (op4){
                     case 0:
                     case 1:
                     case 2:
+                        if(objAlumnx.verNotas(objAlumnx.verNombreDeMaterias([op2]).length == 0)){
+                            alert(`No tenes ninguna nota registrada en la materia ${objAlumnx.verNombreDeMaterias([op2])}`);
+                            break;
+                        }
                         alert(objAlumnx.verPromedioDe(objAlumnx.verNombreDeMaterias()[op4]));
                         break;
                     default:
@@ -236,6 +268,10 @@ function menuMaterias(dni){
                 break;
 
             case 5:
+                if(stringOpcionesMateriasInscriptx(objAlumnx).length==0){
+                    alert("No estas inscriptx a ninguna materia");
+                    break;
+                }
                 alert(`El promedio total de tu carrera es ${objAlumnx.verPromedioTotalDeCarrera()}`);
                 break;
 
